@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Interfaces\Admin\AdminArticleInterface;
+use App\Http\Requests\Articles\AddArticleRequest;
+use App\Http\Requests\Articles\DeleteArticleRequest;
+use App\Http\Requests\Articles\UpdateArticleRequest;
 use Illuminate\Http\Request;
 
 class AdminArticleController extends Controller
@@ -25,7 +28,7 @@ class AdminArticleController extends Controller
         return $this->adminArticleInterface->create();
     }
 
-    public function store(Request $request)
+    public function store(AddArticleRequest $request)
     {
         return $this->adminArticleInterface->store($request);
     }
@@ -40,12 +43,12 @@ class AdminArticleController extends Controller
         return $this->adminArticleInterface->show($articleId);
     }
 
-    public function update(Request $request)
+    public function update(UpdateArticleRequest $request)
     {
         return $this->adminArticleInterface->update($request);
     }
 
-    public function delete(Request $request)
+    public function delete(DeleteArticleRequest $request)
     {
         return $this->adminArticleInterface->delete($request);
     }

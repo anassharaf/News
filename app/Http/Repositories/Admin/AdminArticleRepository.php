@@ -6,11 +6,13 @@ use App\Http\Interfaces\Admin\AdminArticleInterface;
 use App\Models\Article;
 use App\Models\Category;
 use App\Traits\ImagesTrait;
+use App\Traits\PermissionsTrait;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class AdminArticleRepository implements AdminArticleInterface
 {
-    use ImagesTrait;
+    use ImagesTrait,PermissionsTrait;
 
     public function index()
     {
@@ -32,7 +34,9 @@ class AdminArticleRepository implements AdminArticleInterface
             'title'         => $request->title,
             'body'          => $request->body,
             'image'         => $imageName,
-            'category_id'   => $request->category_id
+            'category_id'   => $request->category_id,
+            'created_by'    => Auth::id(),
+            'updated_by'    => Auth::id()
         ]);
         Alert::success('Success','Article Created Successfully');
         return redirect(route('admin.articles.all'));
@@ -40,6 +44,7 @@ class AdminArticleRepository implements AdminArticleInterface
 
     public function edit($articleId)
     {
+        $this->permission(['admin','supervisor']);
         $article = Article::find($articleId);
         $categories = Category::get();
         return view('Admin.Articles.edit',compact('article','categories'));
@@ -47,6 +52,7 @@ class AdminArticleRepository implements AdminArticleInterface
 
     public function update($request)
     {
+        $this->permission(['admin','supervisor']);
         $article = Article::find($request->id);
         if (!is_null($request->image))
         {
@@ -57,6 +63,7 @@ class AdminArticleRepository implements AdminArticleInterface
             'title'         => $request->title,
             'body'          => $request->body,
             'category_id'   => $request->category_id,
+            'updated_by'    => Auth::id(),
             'image'         => (isset($imageName))?$imageName:$article->getRawOriginal('image')
         ]);
         Alert::success('Success','Category Updated Successfully');
@@ -71,6 +78,7 @@ class AdminArticleRepository implements AdminArticleInterface
 
     public function delete($request)
     {
+        $this->permission(['admin','supervisor']);
         $article = Article::find($request->id);
         unlink(public_path($article->image));
         $article->delete();

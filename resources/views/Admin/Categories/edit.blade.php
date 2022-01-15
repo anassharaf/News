@@ -54,12 +54,21 @@
                                     <input type="hidden" value="{{$category->id}}" name="id">
                                     <div class="form-group">
                                         <input type="file" class="form-control" value="" name="image">
+                                        @error('image')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="name" value="{{$category->name}}" placeholder="Category Name">
+                                        @error('name')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Category Description">{{$category->description}}</textarea>
+                                        @error('description')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-0 mt-3 justify-content-end">

@@ -54,9 +54,15 @@
                                     <input type="hidden" value="{{$article->id}}" name="id">
                                     <div class="form-group">
                                         <input type="file" class="form-control" value="" name="image">
+                                        @error('image')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="title" value="{{$article->title}}" placeholder="Article Title">
+                                        @error('title')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <select name="category_id">
@@ -65,9 +71,15 @@
                                                 <option value="{{$category->id}}" {{($article->category_id == $category->id)?'selected':''}}>{{$category->name}}</option>
                                             @endforeach
                                         </select>
+                                        @error('category_id')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <textarea name="body" class="form-control" cols="30" rows="10" placeholder="Article Body">{{$article->body}}</textarea>
+                                        @error('body')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-0 mt-3 justify-content-end">

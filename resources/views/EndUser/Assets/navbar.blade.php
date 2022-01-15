@@ -31,13 +31,13 @@
                 <div class="header_top">
                     <div class="header_top_left">
                         <ul class="top_nav">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{{route('home')}}">Home</a></li>
                             <li><a href="#">About</a></li>
-                            <li><a href="pages/contact.html">Contact</a></li>
+                            <li><a href="#">Contact</a></li>
                         </ul>
                     </div>
                     <div class="header_top_right">
-                        <p>Friday, December 05, 2045</p>
+                        <p>{{date_format(now(),'D d F Y h:i a')}}</p>
                     </div>
                 </div>
             </div>
@@ -56,21 +56,10 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav main_nav">
-                    <li class="active"><a href="index.html"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
-                    <li><a href="#">Technology</a></li>
-                    <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mobile</a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Android</a></li>
-                            <li><a href="#">Samsung</a></li>
-                            <li><a href="#">Nokia</a></li>
-                            <li><a href="#">Walton Mobile</a></li>
-                            <li><a href="#">Sympony</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Laptops</a></li>
-                    <li><a href="#">Tablets</a></li>
-                    <li><a href="pages/contact.html">Contact Us</a></li>
-                    <li><a href="pages/404.html">404 Page</a></li>
+                    <li class="active"><a href="{{route('home')}}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
+                    @foreach($categories as $category)
+                        <li><a href="#">{{$category->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </nav>
@@ -80,26 +69,16 @@
             <div class="col-lg-12 col-md-12">
                 <div class="latest_newsarea"> <span>Latest News</span>
                     <ul id="ticker01" class="news_sticker">
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My First News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Second News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Third News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Four News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Five News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Six News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Seven News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail3.jpg')}}" alt="">My Eight News Item</a></li>
-                        <li><a href="#"><img src="{{asset('EndUserAssets/images/news_thumbnail2.jpg')}}" alt="">My Nine News Item</a></li>
+                        @foreach($articles as $article)
+                            <li><a href="{{route('article.show',[$article->categories(),$article->id])}}"><img src="{{asset($article->image)}}" alt="">{{$article->title}}</a></li>
+                        @endforeach
+
                     </ul>
                     <div class="social_area">
                         <ul class="social_nav">
-                            <li class="facebook"><a href="#"></a></li>
-                            <li class="twitter"><a href="#"></a></li>
-                            <li class="flickr"><a href="#"></a></li>
-                            <li class="pinterest"><a href="#"></a></li>
-                            <li class="googleplus"><a href="#"></a></li>
-                            <li class="vimeo"><a href="#"></a></li>
-                            <li class="youtube"><a href="#"></a></li>
-                            <li class="mail"><a href="#"></a></li>
+                            @foreach($social as $item)
+                            <li ><a style="background-image:url({{asset($item->icon)}});" href="https://{{$item->link}}" title="{{$item->social_network}}" ></a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>

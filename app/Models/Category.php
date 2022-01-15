@@ -29,4 +29,9 @@ class Category extends Model
     {
         return 'Images/Categories/'. $value;
     }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class,'category_id','id');
+    }
 }

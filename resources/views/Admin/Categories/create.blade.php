@@ -51,12 +51,21 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="file" class="form-control" name="image">
+                                        @error('image')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                     <input type="text" class="form-control" name="name" placeholder="Category Name">
+                                        @error('name')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Category Description"></textarea>
+                                        @error('description')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-0 mt-3 justify-content-end">

@@ -49,11 +49,20 @@
                             <div class="card-body pt-0">
                                 <form class="form-horizontal" method="post" action="{{route('admin.articles.store')}}" enctype="multipart/form-data">
                                     @csrf
+
+
                                     <div class="form-group">
                                         <input type="file" class="form-control" name="image">
+                                        @error('image')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
+
                                     <div class="form-group">
                                     <input type="text" class="form-control" name="title" placeholder="Article Title">
+                                        @error('title')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
 
@@ -63,9 +72,15 @@
                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                     </select>
+                                        @error('category_id')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <textarea name="body" class="form-control" cols="30" rows="10" placeholder="Article Body"></textarea>
+                                        @error('body')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
                                     </div>
 
                                     <div class="form-group mb-0 mt-3 justify-content-end">

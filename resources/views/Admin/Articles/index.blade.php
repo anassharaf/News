@@ -61,7 +61,9 @@
                                             <th>Title</th>
                                             <th>Image</th>
                                             <th>Category</th>
+                                            @canany(['admin','supervisor'])
                                             <th>Action</th>
+                                            @endcanany
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -70,7 +72,8 @@
                                             <th>{{++$key}}</th>
                                             <td>{{$article->title}}</td>
                                             <td><img src="{{asset($article->image)}}" width="100px" height="80px" alt="Image"></td>
-                                            <td>{{$article->category_id}}</td>
+                                            <td>{{$article->categories()}}</td>
+                                            @canany(['admin','supervisor'])
                                             <td>
                                                 <a class="btn btn-primary" href="{{route('admin.articles.show',[$article->id])}}" title="View"><i class="fa fa-eye"></i></a>
                                                 <a class="btn btn-success" href="{{route('admin.articles.edit',[$article->id])}}" title="Edit"><i class="fa fa-edit"></i></a>
@@ -81,6 +84,7 @@
                                                     <button type="submit" class="btn btn-danger" href="#" title="Delete"><i class="fa fa-trash"></i></button>
                                                 </form>
                                             </td>
+                                            @endcanany
                                         </tr>
                                         @endforeach
                                         </tbody>
