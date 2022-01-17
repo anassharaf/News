@@ -38,7 +38,10 @@
     </div>
 </footer>
 </div>
+{{--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>--}}
+{{--<script src="{{ asset('js/share.js') }}"></script>--}}
 <script src="{{asset('EndUserAssets/assets/js/jquery.min.js')}}"></script>
+
 <script src="{{asset('EndUserAssets/assets/js/wow.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/slick.min.js')}}"></script>
@@ -46,5 +49,6 @@
 <script src="{{asset('EndUserAssets/assets/js/jquery.newsTicker.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/jquery.fancybox.pack.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/custom.js')}}"></script>
+
 </body>
 </html>

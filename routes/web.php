@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\Admin\AdminArticleController;
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\AdminBannerController;
+use App\Http\Controllers\Admin\AdminCampaignBannerController;
+use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Admin\AdminCategoryController;
 use App\Http\Controllers\Admin\AdminSocialMediaController;
 use App\Http\Controllers\Admin\AdminUsersController;
@@ -70,6 +73,7 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware' => ['auth','activeU
         Route::delete('delete',[AdminArticleController::class,'delete'])->name('delete');
     });
 
+
     Route::group(['prefix'=>'users' , 'as'=>'users.'],function (){
         Route::get('/',[AdminUsersController::class,'index'])->name('all');
         Route::get('create',[AdminUsersController::class,'create'])->name('create');
@@ -80,6 +84,36 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware' => ['auth','activeU
         Route::get('deactivate/{userId}',[AdminUsersController::class,'deactivate'])->name('deactivate');
         Route::put('update',[AdminUsersController::class, 'update'])->name('update');
         Route::delete('delete',[AdminUsersController::class,'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix'=>'banners' , 'as'=>'banners.'],function (){
+        Route::get('/',[AdminBannerController::class,'index'])->name('all');
+        Route::get('create',[AdminBannerController::class,'create'])->name('create');
+        Route::post('store',[AdminBannerController::class,'store'])->name('store');
+        Route::get('edit/{bannerId}',[AdminBannerController::class,'edit'])->name('edit');
+        Route::get('show/{bannerId}',[AdminBannerController::class,'show'])->name('show');
+        Route::put('update',[AdminBannerController::class, 'update'])->name('update');
+        Route::delete('delete',[AdminBannerController::class,'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix'=>'campaigns' , 'as'=>'campaigns.'],function (){
+        Route::get('/',[AdminCampaignController::class,'index'])->name('all');
+        Route::get('create',[AdminCampaignController::class,'create'])->name('create');
+        Route::post('store',[AdminCampaignController::class,'store'])->name('store');
+        Route::get('edit/{campaignId}',[AdminCampaignController::class,'edit'])->name('edit');
+        Route::get('show/{campaignId}',[AdminCampaignController::class,'show'])->name('show');
+        Route::get('change-status/{campaignId}',[AdminCampaignController::class,'changeStatus'])->name('change-status');
+        Route::put('update',[AdminCampaignController::class, 'update'])->name('update');
+        Route::delete('delete',[AdminCampaignController::class,'delete'])->name('delete');
+    });
+
+
+    Route::group(['prefix'=>'campaign/banners' , 'as'=>'campaign-banners.'],function (){
+        Route::get('{campaignId}/create',[AdminCampaignBannerController::class,'create'])->name('create');
+        Route::post('store',[AdminCampaignBannerController::class,'store'])->name('store');
+        Route::delete('delete',[AdminCampaignBannerController::class,'delete'])->name('delete');
     });
 
 });

@@ -18,6 +18,7 @@
 <script src="{{asset('EndUserAssets/assets/js/html5shiv.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/respond.min.js')}}"></script>
 <![endif]-->
+
 </head>
 <body>
 <div id="preloader">
@@ -44,7 +45,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12">
                 <div class="header_bottom">
                     <div class="logo_area"><a href="index.html" class="logo"><img src="{{asset('EndUserAssets/images/logo.jpg')}}" alt=""></a></div>
-                    <div class="add_banner"><a href="#"><img src="{{asset('EndUserAssets/images/addbanner_728x90_V1.jpg')}}" alt=""></a></div>
+                    @if(count($headerBanners)-1 >= 0)
+                    <div class="add_banner"><a href="#"><img src="{{asset($headerBanners[rand(0,count($headerBanners)-1)]->image)}}" alt=""></a></div>
+                    @endif
                 </div>
             </div>
         </div>

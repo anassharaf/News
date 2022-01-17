@@ -1,3 +1,4 @@
+
 @include('EndUser.Assets.navbar')
   <section id="contentSection">
     <div class="row">
@@ -14,19 +15,15 @@
               <p>
                   {{$article->body}}
               </p>
-                <ul>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-                <li>Nullam vitae nibh odio, non scelerisque nibh</li>
-              </ul>
-              <h2>This is h2 title</h2>
-              <h3>This is h3 title</h3>
-              <h4>This is h4 title</h4>
-              <h5>This is h5 title</h5>
-              <h6>This is h6 Title</h6>
+                <div >
+                    <h4>Share This Article:</h4>
+                    <ul>
+                        <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{\Illuminate\Support\Facades\Request::url()}}" class="btn btn-primary"  id="">Facebook</a></li>
+                        <li><a target="_blank" href="https://twitter.com/intent/tweet?text=my share text&amp;url={{\Illuminate\Support\Facades\Request::url()}}"  class="btn default-btn" id="">Twitter</a></li>
+                        <li><a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{\Illuminate\Support\Facades\Request::url()}}" class="btn btn-primary" id="">Linkedin</a></li>
+                    </ul>
+                </div>
+                <br>
               <button class="btn default-btn">Default</button>
               <button class="btn btn-red">Red Button</button>
               <button class="btn btn-yellow">Yellow Button</button>
@@ -142,8 +139,10 @@
             </div>
           </div>
           <div class="single_sidebar wow fadeInDown">
-            <h2><span>Sponsor</span></h2>
-            <a class="sideAdd" href="#"><img src="../images/add_img.jpg" alt=""></a> </div>
+              @if(count($sideBanners)-1 >= 0)
+                  <h2><span>Sponsor</span></h2>
+                  <a class="sideAdd" href="#"><img src="{{asset($sideBanners[rand(0,count($sideBanners)-1)]->image)}}" alt=""></a>
+              @endif
           <div class="single_sidebar wow fadeInDown">
             <h2><span>Category Archive</span></h2>
             <select class="catgArchive">

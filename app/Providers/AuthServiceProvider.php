@@ -32,5 +32,7 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('supervisor', function (User $user) {
             $is_authorized = $user->job_title_id == 2 ? true : false ;
             return $is_authorized;});
+
+
     }
 }
