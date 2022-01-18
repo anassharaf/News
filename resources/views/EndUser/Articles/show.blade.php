@@ -15,31 +15,13 @@
               <p>
                   {{$article->body}}
               </p>
-                <div >
-                    <h4>Share This Article:</h4>
-                    <ul>
-                        <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{\Illuminate\Support\Facades\Request::url()}}" class="btn btn-primary"  id="">Facebook</a></li>
-                        <li><a target="_blank" href="https://twitter.com/intent/tweet?text=my share text&amp;url={{\Illuminate\Support\Facades\Request::url()}}"  class="btn default-btn" id="">Twitter</a></li>
-                        <li><a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{\Illuminate\Support\Facades\Request::url()}}" class="btn btn-primary" id="">Linkedin</a></li>
-                    </ul>
-                </div>
-                <br>
-              <button class="btn default-btn">Default</button>
-              <button class="btn btn-red">Red Button</button>
-              <button class="btn btn-yellow">Yellow Button</button>
-              <button class="btn btn-green">Green Button</button>
-              <button class="btn btn-black">Black Button</button>
-              <button class="btn btn-orange">Orange Button</button>
-              <button class="btn btn-blue">Blue Button</button>
-              <button class="btn btn-lime">Lime Button</button>
-              <button class="btn btn-theme">Theme Button</button>
             </div>
             <div class="social_link">
               <ul class="sociallink_nav">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{\Illuminate\Support\Facades\Request::url()}}"><i class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" href="https://twitter.com/intent/tweet?text=my share text&amp;url={{\Illuminate\Support\Facades\Request::url()}}" ><i class="fa fa-twitter"></i></a></li>
                 <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{\Illuminate\Support\Facades\Request::url()}}"><i class="fa fa-linkedin"></i></a></li>
                 <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
               </ul>
             </div>

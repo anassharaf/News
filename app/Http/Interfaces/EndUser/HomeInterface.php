@@ -7,4 +7,8 @@ interface HomeInterface
     public function index();
 
     public function showArticle($categoryName,$articleId);
+
+    public function contactPage();
+
+    public function storeContact($request);
 }

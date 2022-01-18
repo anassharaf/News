@@ -6,7 +6,9 @@ use App\Events\ArticleViews;
 use App\Http\Interfaces\EndUser\HomeInterface;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\User;
+use RealRashid\SweetAlert\Facades\Alert;
 use Share;
 
 class HomeRepository implements HomeInterface
@@ -23,13 +25,23 @@ class HomeRepository implements HomeInterface
     {
         $article = Article::find($articleId);
         $user = User::find($article->created_by);
-        $socialShare = Share::page('http://jorenvanhocht.be', 'Share title')
-            ->facebook()
-            ->twitter()
-            ->linkedin('Extra linkedin summary can be passed here')
-            ->whatsapp();
         event(new ArticleViews($article));
-        return view('EndUser.Articles.show',compact('article','user','socialShare'));
+        return view('EndUser.Articles.show',compact('article','user'));
     }
 
+    public function contactPage()
+    {
+        return view('EndUser.contact');
+    }
+
+    public function storeContact($request)
+    {
+        Contact::create([
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'message'   => $request->message
+        ]);
+        Alert::success('Success','Your Message Has Been Sent!');
+        return redirect()->back();
+    }
 }

@@ -49,6 +49,7 @@
 <script src="{{asset('EndUserAssets/assets/js/jquery.newsTicker.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/jquery.fancybox.pack.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/custom.js')}}"></script>
+@include('sweetalert::alert')
 
 </body>
 </html>

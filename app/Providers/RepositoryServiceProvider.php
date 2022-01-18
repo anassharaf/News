@@ -8,6 +8,7 @@ use App\Http\Interfaces\Admin\AdminBannerInterface;
 use App\Http\Interfaces\Admin\AdminCampaignBannerInterface;
 use App\Http\Interfaces\Admin\AdminCampaignInterface;
 use App\Http\Interfaces\Admin\AdminCategoryInterface;
+use App\Http\Interfaces\Admin\AdminContactInterface;
 use App\Http\Interfaces\Admin\AdminSocialMediaInterface;
 use App\Http\Interfaces\Admin\AdminUsersInterface;
 use App\Http\Interfaces\EndUser\HomeInterface;
@@ -17,6 +18,7 @@ use App\Http\Repositories\Admin\AdminBannerRepository;
 use App\Http\Repositories\Admin\AdminCampaignBannerRepository;
 use App\Http\Repositories\Admin\AdminCampaignRepository;
 use App\Http\Repositories\Admin\AdminCategoryRepository;
+use App\Http\Repositories\Admin\AdminContactRepository;
 use App\Http\Repositories\Admin\AdminSocialMediaRepository;
 use App\Http\Repositories\Admin\AdminUsersRepository;
 use App\Http\Repositories\EndUser\HomeRepository;
@@ -38,6 +40,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AdminSocialMediaInterface::class,AdminSocialMediaRepository::class);
         $this->app->bind(AdminBannerInterface::class,AdminBannerRepository::class);
         $this->app->bind(AdminCampaignInterface::class,AdminCampaignRepository::class);
+        $this->app->bind(AdminContactInterface::class,AdminContactRepository::class);
         $this->app->bind(AdminCampaignBannerInterface::class,AdminCampaignBannerRepository::class);
         $this->app->bind(HomeInterface::class,HomeRepository::class);
     }

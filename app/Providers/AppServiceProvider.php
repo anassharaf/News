@@ -7,6 +7,8 @@ use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\SocialMedia;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Jorenvh\Share\Share;
@@ -35,13 +37,16 @@ class AppServiceProvider extends ServiceProvider
         $popular = Article::orderBy('views','desc')->take(5)->get();
         $social = SocialMedia::get();
         $campaigns = Campaign::where('active',1)->get();
-//        $campaignsBanners = new Collection();
         $sideBanners = new Collection();
         $headerBanners = new Collection();
         foreach ($campaigns as $campaign){
-//            $campaignsBanners = $campaignsBanners->merge($campaign->campaignBanners);
-            $sideBanners = $sideBanners->merge($campaign->getCampaignBannersByBannerId(3));
-            $headerBanners = $headerBanners->merge($campaign->getCampaignBannersByBannerId(2));
+
+            $startDate = date('Y-m-d', strtotime($campaign->start_date));
+            $endDate = date('Y-m-d', strtotime($campaign->end_date));
+            if (now()->between($startDate, $endDate)) {
+                $sideBanners = $sideBanners->merge($campaign->getCampaignBannersByBannerId(3));
+                $headerBanners = $headerBanners->merge($campaign->getCampaignBannersByBannerId(2));
+            }
         }
         View::share([
             'categories'=> $categories,

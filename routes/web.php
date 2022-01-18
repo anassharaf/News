@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminBannerController;
 use App\Http\Controllers\Admin\AdminCampaignBannerController;
 use App\Http\Controllers\Admin\AdminCampaignController;
 use App\Http\Controllers\Admin\AdminCategoryController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminSocialMediaController;
 use App\Http\Controllers\Admin\AdminUsersController;
 use App\Http\Controllers\EndUser\HomeController;
@@ -74,6 +75,15 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware' => ['auth','activeU
     });
 
 
+    Route::group(['prefix'=>'contacts' , 'as'=>'contacts.'],function (){
+        Route::get('/',[AdminContactController::class,'index'])->name('all');
+        Route::get('show/{contactId}',[AdminContactController::class,'show'])->name('show');
+        Route::put('update',[AdminContactController::class, 'update'])->name('update');
+        Route::delete('delete',[AdminContactController::class,'delete'])->name('delete');
+    });
+
+
+
     Route::group(['prefix'=>'users' , 'as'=>'users.'],function (){
         Route::get('/',[AdminUsersController::class,'index'])->name('all');
         Route::get('create',[AdminUsersController::class,'create'])->name('create');
@@ -121,7 +131,11 @@ Route::group(['prefix'=>'admin', 'as'=>'admin.','middleware' => ['auth','activeU
 Route::group([],function (){
     Route::get('/',[HomeController::class,'index'])->name('home');
     Route::get('/{categoryName}/{articleId}',[HomeController::class,'showArticle'])->name('article.show');
-    Route::get('article',function (){
-        return \view('EndUser.Articles.show');
-    });
+    Route::get('contact-us',[HomeController::class,'contactPage'])->name('contactPage');
+    Route::post('contact-us',[HomeController::class,'storeContact'])->name('storeContact');
+
+
+
 });
+
+

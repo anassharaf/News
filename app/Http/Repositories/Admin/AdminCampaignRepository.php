@@ -60,7 +60,6 @@ class AdminCampaignRepository implements AdminCampaignInterface
     public function edit($campaignId)
     {
         $campaign = Campaign::find($campaignId);
-
         return view('Admin.Campaigns.edit',compact('campaign'));
     }
 
