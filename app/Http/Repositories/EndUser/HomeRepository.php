@@ -8,6 +8,7 @@ use App\Models\Article;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use RealRashid\SweetAlert\Facades\Alert;
 use Share;
 
@@ -21,12 +22,24 @@ class HomeRepository implements HomeInterface
         return view('EndUser.index',compact('cat1','cat2','cat3'));
     }
 
+    public function categoryPage($categoryName)
+    {
+        $cat = Category::where('name',$categoryName)->first();
+        $categoryArticles = $cat->articles()->orderBy('id','desc')->paginate(10);
+        return view('EndUser.categories',compact('categoryArticles'));
+    }
+
     public function showArticle($categoryName,$articleId)
     {
         $article = Article::find($articleId);
         $user = User::find($article->created_by);
+        $articleTags = $article->tags;
+        $relatedPosts = new Collection();
+        foreach ($articleTags as $tag){
+            $relatedPosts = $relatedPosts->merge($tag->articles);
+        }
         event(new ArticleViews($article));
-        return view('EndUser.Articles.show',compact('article','user'));
+        return view('EndUser.Articles.show',compact('article','user','relatedPosts'));
     }
 
     public function contactPage()

@@ -64,6 +64,14 @@
                                         <small class="form-text text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
+
+
+                                    <div class="form-group">
+                                    <input type="text" class="form-control" name="tags" placeholder="Tag Name">
+                                        @error('title')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
                                     <div class="form-group">
 
                                     <select name="category_id">

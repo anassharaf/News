@@ -5,63 +5,39 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="single_page">
-            <ol class="breadcrumb">
-              <li><a href="{{route('home')}}">Home</a></li>
-              <li><a href="{{route('categoryPage',$article->categories())}}">{{$article->categories()}}</a></li>
-            </ol>
-            <h1>{{$article->title}}</h1>
-            <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>{{$user->name}}</a> <span><i class="fa fa-calendar"></i>{{$article->created_at->format('h:i a')}}</span> <a href="#"><i class="fa fa-tags"></i>{{$article->categories()}}</a> </div>
-            <div class="single_page_content"> <img class="img-center" src="{{asset($article->image)}}" alt="">
-              <p>
-                  {{$article->body}}
-              </p>
-                <br>
-                <div class="tags">
 
-                    @foreach($article->tags as $tag)
-                        <a href="" class="btn btn-primary" >{{$tag->name}}</a>
-                    @endforeach
+              <ul class="business_catgnav">
+                  <li>
+                      @foreach($categoryArticles as $article)
+                      <div class="row">
+                          <div class="col-md-4 mb-4">
+                              <div class="bg-image hover-overlay shadow-1-strong rounded ripple" data-mdb-ripple-color="light">
+                                  <img src="{{asset($article->image)}}" width="200px" height="150px" class="img-fluid" />
+                                  <a href="#">
+                                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                  </a>
+                              </div>
+                          </div>
 
-                </div>
-            </div>
+                          <div class="col-md-8 mb-4">
+                              <h5>{{$article->title}}</h5>
+                              <p>
+                                  {{substr($article->body,0,150)}}...
+                              </p>
 
-
-            <div class="social_link">
-              <ul class="sociallink_nav">
-                <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{\Illuminate\Support\Facades\Request::url()}}"><i class="fa fa-facebook"></i></a></li>
-                <li><a target="_blank" href="https://twitter.com/intent/tweet?text=my share text&amp;url={{\Illuminate\Support\Facades\Request::url()}}" ><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a target="_blank" href="https://www.linkedin.com/sharing/share-offsite/?url={{\Illuminate\Support\Facades\Request::url()}}"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-              </ul>
-            </div>
-
-
-            <div class="related_post">
-              <h2>Related Posts <i class="fa fa-thumbs-o-up"></i></h2>
-              <ul class="spost_nav wow fadeInDown animated">
-                  @foreach($relatedPosts as $post)
-                <li>
-                  <div class="media"> <a class="media-left" href="{{route('article.show',[$post->categories(),$post->id])}}"> <img src="{{asset($post->image)}}" alt=""> </a>
-                    <div class="media-body"> <a class="catg_title" href="{{route('article.show',[$post->categories(),$post->id])}}">{{$post->title}}</a> </div>
-                  </div>
-                </li>
-                  @endforeach
+                              <a href="{{route('article.show',[$article->categories(),$article->id])}}" type="button" class="btn btn-primary">Read</a>
+                          </div>
+                      </div>
+                      <hr>
+                      @endforeach
+                  </li>
 
               </ul>
-            </div>
+              <div class="text-center" >{{$categoryArticles->links()}}</div>
           </div>
         </div>
       </div>
-      <nav class="nav-slit"> <a class="prev" href="#"> <span class="icon-wrap"><i class="fa fa-angle-left"></i></span>
-        <div>
-          <h3>City Lights</h3>
-          <img src="../images/post_img1.jpg" alt=""/> </div>
-        </a> <a class="next" href="#"> <span class="icon-wrap"><i class="fa fa-angle-right"></i></span>
-        <div>
-          <h3>Street Hills</h3>
-          <img src="../images/post_img1.jpg" alt=""/> </div>
-        </a> </nav>
+
       <div class="col-lg-4 col-md-4 col-sm-4">
         <aside class="right_content">
           <div class="single_sidebar">
@@ -150,7 +126,10 @@
             </ul>
           </div>
         </aside>
+
+
       </div>
     </div>
+
   </section>
 @include('EndUser.Assets.footer')

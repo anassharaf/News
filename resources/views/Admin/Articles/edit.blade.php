@@ -1,3 +1,4 @@
+
 @extends('Admin.Assets.master')
 @section('css')
 @endsection
@@ -64,6 +65,14 @@
                                         <small class="form-text text-danger">{{$message}}</small>
                                         @enderror
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="tags" value="@foreach($article->tags as $tag){{$tag->name}},@endforeach">
+                                        @error('tags')
+                                        <small class="form-text text-danger">{{$message}}</small>
+                                        @enderror
+                                    </div>
+
                                     <div class="form-group">
                                         <select name="category_id">
                                             <option >Select Category</option>

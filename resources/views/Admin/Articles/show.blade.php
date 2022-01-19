@@ -55,6 +55,10 @@
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="name" value="{{$article->title}}" placeholder="Category Name" disabled>
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="name" value="@foreach($article->tags as $tag){{$tag->name}},@endforeach" placeholder="Category Name" disabled>
+                                    </div>
                                     <div class="form-group">
                                         <textarea name="description" class="form-control" cols="30" rows="10" placeholder="Category Description" disabled>{{$article->body}}</textarea>
                                     </div>

@@ -133,6 +133,7 @@ Route::group([],function (){
     Route::get('/{categoryName}/{articleId}',[HomeController::class,'showArticle'])->name('article.show');
     Route::get('contact-us',[HomeController::class,'contactPage'])->name('contactPage');
     Route::post('contact-us',[HomeController::class,'storeContact'])->name('storeContact');
+    Route::get('{categoryName}',[HomeController::class,'categoryPage'])->name('categoryPage');
 
 
 

@@ -20,6 +20,11 @@ class HomeController extends Controller
         return $this->homeInterface->index();
     }
 
+    public function categoryPage($categoryName)
+    {
+        return $this->homeInterface->categoryPage($categoryName);
+    }
+
     public function showArticle($categoryName,$articleId)
     {
         return $this->homeInterface->showArticle($categoryName,$articleId);

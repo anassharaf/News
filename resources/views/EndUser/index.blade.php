@@ -43,6 +43,7 @@
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8">
             <div class="left_content">
+
                 <div class="single_post_content">
                     <h2><span>{{$cat1[0]->categories()}}</span></h2>
                     <div class="single_post_content_left">
@@ -61,7 +62,7 @@
                     </div>
                     <div class="single_post_content_right">
                         <ul class="spost_nav">
-                            @foreach($cat1 as $art)
+                            @foreach($cat1->slice(0, 5) as $art)
                                 @if($loop->first)
                                     @continue
                                 @endif
@@ -95,7 +96,7 @@
                                 </li>
                             </ul>
                             <ul class="spost_nav">
-                                @foreach($cat2 as $art)
+                                @foreach($cat2->slice(0, 5) as $art)
                                     @if($loop->first)
                                         @continue
                                     @endif
@@ -122,7 +123,7 @@
                                 </li>
                             </ul>
                             <ul class="spost_nav">
-                                @foreach($cat3 as $art)
+                                @foreach($cat3->slice(0, 5) as $art)
                                     @if($loop->first)
                                         @continue
                                     @endif

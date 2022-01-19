@@ -5,6 +5,7 @@ namespace App\Http\Repositories\Admin;
 use App\Http\Interfaces\Admin\AdminArticleInterface;
 use App\Models\Article;
 use App\Models\Category;
+use App\Models\Tag;
 use App\Traits\ImagesTrait;
 use App\Traits\PermissionsTrait;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class AdminArticleRepository implements AdminArticleInterface
 
     public function index()
     {
-        $articles = Article::get();
+        $articles = Article::orderBy('id','desc')->paginate(10);
         return view('Admin.Articles.index',compact('articles'));
     }
 
@@ -30,7 +31,7 @@ class AdminArticleRepository implements AdminArticleInterface
     {
         $imageName = time() . '_article.'.$request->image->extension();
         $this->uploadImage($request->image,$imageName,'Articles');
-        Article::create([
+        $article = Article::create([
             'title'         => $request->title,
             'body'          => $request->body,
             'image'         => $imageName,
@@ -38,6 +39,7 @@ class AdminArticleRepository implements AdminArticleInterface
             'created_by'    => Auth::id(),
             'updated_by'    => Auth::id()
         ]);
+        if ($this->tag($request->tags,$article))
         Alert::success('Success','Article Created Successfully');
         return redirect(route('admin.articles.all'));
     }
@@ -46,8 +48,9 @@ class AdminArticleRepository implements AdminArticleInterface
     {
         $this->permission(['admin','supervisor']);
         $article = Article::find($articleId);
+        $tags = $article->tags->toArray();
         $categories = Category::get();
-        return view('Admin.Articles.edit',compact('article','categories'));
+        return view('Admin.Articles.edit',compact('article','categories','tags'));
     }
 
     public function update($request)
@@ -66,6 +69,9 @@ class AdminArticleRepository implements AdminArticleInterface
             'updated_by'    => Auth::id(),
             'image'         => (isset($imageName))?$imageName:$article->getRawOriginal('image')
         ]);
+        $article->tags()->sync([]); //delete all previous tags in the article
+        $tags = $request->tags;
+        $this->tag($tags,$article);
         Alert::success('Success','Category Updated Successfully');
         return redirect(route('admin.articles.all'));
     }
@@ -84,5 +90,28 @@ class AdminArticleRepository implements AdminArticleInterface
         $article->delete();
         Alert::success('success','Category Deleted Successfully');
         return redirect()->back();
+    }
+
+    private function tag($tags,$article)
+    {
+        $tags = explode(',',$tags);
+        foreach ($tags as $tag){
+            $tag1 = Tag::where('name',$tag)->first();
+
+            if (is_null($tag1))
+            {
+                $tag1 =Tag::create([
+                    'name'  => $tag
+                ]);
+            }
+            $tag1->articles()->attach($article);
+            $tag1 = null;
+
+        }
+        return true;
+
+
+
+
     }
 }

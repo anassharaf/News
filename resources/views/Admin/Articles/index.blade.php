@@ -67,9 +67,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+
                                         @foreach($articles as $key => $article)
                                         <tr>
-                                            <th>{{++$key}}</th>
+                                            <th>{{$articles->firstItem()+$key}}</th>
                                             <td>{{$article->title}}</td>
                                             <td><img src="{{asset($article->image)}}" width="100px" height="80px" alt="Image"></td>
                                             <td>{{$article->categories()}}</td>
@@ -89,6 +90,7 @@
                                         @endforeach
                                         </tbody>
                                     </table>
+                                    <div class="text-center" style="">{{$articles->links()}}</div>
                                 </div>
                             </div>
                         </div>

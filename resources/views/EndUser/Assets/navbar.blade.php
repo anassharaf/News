@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('EndUserAssets/assets/css/jquery.fancybox.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('EndUserAssets/assets/css/theme.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('EndUserAssets/assets/css/style.css')}}">
+
 <!--[if lt IE 9]>
 <script src="{{asset('EndUserAssets/assets/js/html5shiv.min.js')}}"></script>
 <script src="{{asset('EndUserAssets/assets/js/respond.min.js')}}"></script>
@@ -61,7 +62,7 @@
                 <ul class="nav navbar-nav main_nav">
                     <li class="active"><a href="{{route('home')}}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
                     @foreach($categories as $category)
-                        <li><a href="#">{{$category->name}}</a></li>
+                        <li><a href="{{route('categoryPage',$category->name)}}">{{$category->name}}</a></li>
                     @endforeach
                 </ul>
             </div>
